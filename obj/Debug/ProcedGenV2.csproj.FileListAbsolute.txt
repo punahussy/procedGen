@@ -1,0 +1,10 @@
+D:\dev\c#\ProcedGen\obj\Debug\ProcedGenV2.Form1.resources
+D:\dev\c#\ProcedGen\obj\Debug\ProcedGenV2.Textures.resources
+D:\dev\c#\ProcedGen\obj\Debug\ProcedGenV2.csproj.GenerateResource.cache
+D:\dev\c#\ProcedGen\bin\Debug\ProcedGenV2.exe.config
+D:\dev\c#\ProcedGen\bin\Debug\ProcedGenV2.exe
+D:\dev\c#\ProcedGen\bin\Debug\ProcedGenV2.pdb
+D:\dev\c#\ProcedGen\obj\Debug\ProcedGenV2.Properties.Resources.resources
+D:\dev\c#\ProcedGen\obj\Debug\ProcedGenV2.csproj.CoreCompileInputs.cache
+D:\dev\c#\ProcedGen\obj\Debug\ProcedGenV2.exe
+D:\dev\c#\ProcedGen\obj\Debug\ProcedGenV2.pdb
