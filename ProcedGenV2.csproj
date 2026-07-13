@@ -14,4 +14,10 @@
     <NoWarn>$(NoWarn);CA1416</NoWarn>
   </PropertyGroup>
 
+  <!-- Tile textures are embedded into the assembly and loaded via Rendering\Textures.cs -->
+  <ItemGroup>
+    <None Remove="Assets\*.png" />
+    <EmbeddedResource Include="Assets\*.png" />
+  </ItemGroup>
+
 </Project>
