@@ -30,11 +30,11 @@ partial class MainForm
         //
         this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(800, 450);
+        this.ClientSize = new System.Drawing.Size(1040, 660);
+        this.MinimumSize = new System.Drawing.Size(680, 480);
+        this.KeyPreview = true;
         this.Name = "MainForm";
         this.Text = "Procedural Level Generator";
-        this.Load += new System.EventHandler(this.MainForm_Load);
-        this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
         this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
         this.ResumeLayout(false);
     }

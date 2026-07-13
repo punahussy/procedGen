@@ -5,7 +5,7 @@ using ProcedGenV2.Configuration;
 
 namespace ProcedGenV2.Generation;
 
-/// <summary>Строит случайный маршрут тайлов по карте уровня.</summary>
+/// <summary>Строит случайный маршрут тайлов по карте уровня согласно заданным настройкам.</summary>
 public class LevelGenerator : IEnumerable<Tile>
 {
     private static readonly Random Random = new Random();
@@ -21,25 +21,35 @@ public class LevelGenerator : IEnumerable<Tile>
             { Direction.Down,  tile => new Tile(tile.X, tile.Y + 1) },
         };
 
+    private readonly GenerationSettings _settings;
+
     private int _stepsSinceBranch;
     private int _totalSteps;
+    private int _targetCount;
     private Direction _currentDirection;
+
+    public LevelGenerator(GenerationSettings settings)
+    {
+        _settings = settings;
+    }
 
     /// <summary>Карта, построенная последним вызовом <see cref="Generate"/>.</summary>
     public TileMap Map { get; private set; }
 
-    /// <summary>Запускает генерацию нового уровня.</summary>
+    /// <summary>Запускает генерацию нового уровня по текущим настройкам.</summary>
     public void Generate()
     {
-        if (GenerationSettings.MaxTileCount > GenerationSettings.TilesHeight * GenerationSettings.TilesWide)
-            throw new InvalidOperationException(
-                "Затребованное количество тайлов для генерации превышает размеры поля генерации");
+        int width = _settings.TilesWide;
+        int height = _settings.TilesHeight;
 
-        Map = new TileMap();
+        // Больше тайлов, чем ячеек на карте, разместить нельзя — ограничиваем цель.
+        _targetCount = Math.Min(_settings.MaxTileCount, width * height);
+
+        Map = new TileMap(width, height);
         _stepsSinceBranch = 0;
         _totalSteps = 0;
 
-        Tile startTile = new Tile();
+        Tile startTile = new Tile(Random.Next(0, width), Random.Next(0, height));
         Map.Place(startTile);
         ChooseDirection();
         ProcessTile(startTile);
@@ -51,12 +61,12 @@ public class LevelGenerator : IEnumerable<Tile>
         _stepsSinceBranch++;
         _totalSteps++;
 
-        // Останавливаемся при достижении максимального числа тайлов.
-        if (_totalSteps >= GenerationSettings.MaxTileCount)
+        // Останавливаемся при достижении целевого числа тайлов.
+        if (_totalSteps >= _targetCount)
             return;
 
         // Управляем ветвистостью: периодически стартуем от случайного тайла.
-        if (_stepsSinceBranch >= GenerationSettings.Branching)
+        if (_stepsSinceBranch >= _settings.Branching)
         {
             _stepsSinceBranch = 0;
             ProcessRandomTile();
@@ -91,7 +101,7 @@ public class LevelGenerator : IEnumerable<Tile>
 
     private void ChooseDirection() => _currentDirection = (Direction)Random.Next(DirectionCount);
 
-    private bool NextBool() => Random.Next(0, GenerationSettings.BoolChance) == 1;
+    private bool NextBool() => Random.Next(0, _settings.BoolChance) == 1;
 
     private int NextTileIndex() => Random.Next(0, Map.Count - 1);
 
