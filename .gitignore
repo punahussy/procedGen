@@ -1,2 +1,53 @@
+# ---- Build output ----
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
 
+# ---- Visual Studio / Rider / VS Code ----
+.vs/
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# ---- Build / restore artifacts ----
+project.lock.json
+project.fragment.lock.json
+artifacts/
 *.lock
+*.binlog
+
+# ---- Test / coverage results ----
+[Tt]est[Rr]esult*/
+[Cc]overage*/
+*.coverage
+*.coveragexml
+
+# ---- Publish output ----
+[Pp]ublish/
+*.[Pp]ublish.xml
+PublishScripts/
+
+# ---- NuGet ----
+*.nupkg
+*.snupkg
+packages/
+!packages/build/
+*.nuget.props
+*.nuget.targets
+
+# ---- Misc / OS ----
+*.tmp
+*.cache
+Thumbs.db
+Desktop.ini
+.DS_Store
